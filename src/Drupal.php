@@ -14,7 +14,7 @@ class Drupal extends Module
      * @var array
      */
     protected $config = [
-        'drupalRoot' => null
+        'root' => null
     ];
 
     /**
@@ -23,12 +23,12 @@ class Drupal extends Module
     function _initialize($config)
     {
         // We can't get getcwd() as a default parameter, so this will have to do.
-        if (is_null($this->config['drupalRoot'])) {
-            $this->config['drupalRoot'] = getcwd();
+        if (is_null($this->config['root'])) {
+            $this->config['root'] = getcwd();
         }
 
         // Do a Drush-style bootstrap.
-        define('DRUPAL_ROOT', $this->config['drupalRoot']);
+        define('DRUPAL_ROOT', $this->config['root']);
         require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
