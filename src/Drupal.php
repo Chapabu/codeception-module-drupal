@@ -25,6 +25,8 @@ class Drupal extends Module
         // We can't get getcwd() as a default parameter, so this will have to do.
         if (is_null($this->config['root'])) {
             $this->config['root'] = getcwd();
+        } else {
+            $this->config['root'] = getcwd() . DIRECTORY_SEPARATOR . $this->config['root'];
         }
 
         // Do a Drush-style bootstrap.
