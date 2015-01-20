@@ -1,0 +1,12 @@
+{
+    "name": "chapabu/codeception-module-drupal",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chapabu",
+            "email": "chapabu101@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
