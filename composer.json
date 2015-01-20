@@ -8,5 +8,19 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Codeception\\Module": "src"
+        }
+    },
+    "suggest": {
+        "chriscohen/codeception-drupal-pages": "A Codeception module to provide standard Drupal page objects.",
+        "chriscohen/codeception-drupal-content-types": "A Codeception module to provide Drupal content types support.",
+        "pfaocle/codeception-module-drupal-user-registry": "A Codeception module for managing test users."
+    },
+    "require-dev": {
+        "codeception/codeception": "~2.1",
+        "squizlabs/php_codesniffer": "2.1.0"
+    }
 }
