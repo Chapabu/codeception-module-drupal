@@ -14,19 +14,25 @@ $ composer require chapabu/codeception-module-drupal --dev
 
 In your `*.suite.yml` file, add `Drupal` to your enabled modules list.
 
-Example:
+### Example configuration:
+
+This will run tests under the assumption that your Drupal installation is in a `drupal` sub-directory.
 
 ```yaml
 class_name: AcceptanceTester
 modules:
     enabled:
-        - Drupal
+        Drupal:
+            root: 'drupal'
+        
+        
 ```
 
 ### Options
 
 ```root``` - This defines the Drupal root in relation to the `codecept.yml` file. If this isn't passed in it defaults to the current working directory.
 
+Example:
 
 # Running tests
 
