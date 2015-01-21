@@ -8,6 +8,7 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {},
     "autoload": {
         "psr-4": {
@@ -21,6 +22,24 @@
     },
     "require-dev": {
         "codeception/codeception": "~2.1",
-        "squizlabs/php_codesniffer": "2.1.0"
+        "squizlabs/php_codesniffer": "2.1.0",
+        "drupal/drupal": "7.34",
+        "drush/drush": "6.*"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal/drupal",
+                "version": "7.34",
+                "dist": {
+                    "type": "zip",
+                    "url": "http://ftp.drupal.org/files/projects/drupal-7.34.zip"
+                }
+            }
+        }
+    ],
+    "scripts": {
+        "testinit": "./testinit.sh"
     }
 }
