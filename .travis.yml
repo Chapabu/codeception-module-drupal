@@ -16,7 +16,7 @@ install:
 
 # Before running the main test script we want to ensure we've installed Drupal and set up Codeception.
 before_script:
-  - testinit.sh
+  - ./testinit.sh
   - vendor/bin/codecept build
 
 script:
