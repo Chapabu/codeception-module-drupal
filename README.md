@@ -38,9 +38,7 @@ Example:
 
 To setup this module for testing, run `$ composer testinit` followed by `$ vendor/bin/codecept run` or simply `$ codecept run` if you have Codeception installed system wide.
 
-The `testinit.sh` script will use the bundled version of Drush to run `site-install` on the bundled version of Drupal.  This will create an SQLite database and install Drupal.
-
-Once you are done running the tests, run `$ composer donetesting` to remove the SQLite database.
+The `testinit.sh` script will use the bundled version of Drush to run `site-install` on the bundled version of Drupal.  This will install Drupal using the username of root and a blank password to a MySQL database. Feel free to edit this file should you need to, but please ensure it is not comitted back.
 
 ## License
 

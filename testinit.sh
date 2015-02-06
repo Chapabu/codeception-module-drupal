@@ -12,10 +12,11 @@ ADMIN_USER="admin"
 ADMIN_PASSWORD="admin"
 ADMIN_MAIL="null@dev.null"
 PATH_TO_DRUPAL="$PWD/vendor/drupal/drupal"
-SQLITE_URL="sqlite://sites/all/files/.ht.sqlite"
+MYSQL_URL="mysql://root@localhost/drupal_codeception_test"
 
 ./vendor/bin/drush site-install \
-    --db-url=${SQLITE_URL} \
+    --db-su=root \
+    --db-url=${MYSQL_URL} \
     --account-name=${ADMIN_USER} \
     --account-pass=${ADMIN_PASSWORD} \
     --account-mail=${ADMIN_MAIL} \
