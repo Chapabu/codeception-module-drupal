@@ -18,27 +18,24 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     protected $module;
 
-    protected $validConfig = [
-        'root' => 'vendor/drupal/drupal'
-    ];
-
-    protected $invalidConfig = [
-        'root' => 'this/is/a/fake/path'
-    ];
+    /**
+     * @var array
+     */
+    protected $validConfig = [];
 
     /**
-     *
+     * @var array
+     */
+    protected $invalidConfig = [];
+
+    /**
+     * { @inheritdoc }
      */
     protected function _before()
     {
         $this->module = new Codeception\Module\Drupal();
-    }
-
-    /**
-     *
-     */
-    protected function _after()
-    {
+        $this->validConfig = Fixtures::get('validModuleConfig');
+        $this->invalidConfig = Fixtures::get('invalidModuleConfig');
     }
 
     /**
