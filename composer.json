@@ -14,7 +14,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Codeception\\Module\\": "src"
+            "Codeception\\": "src"
         }
     },
     "suggest": {

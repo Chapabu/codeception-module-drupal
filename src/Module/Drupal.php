@@ -1,7 +1,7 @@
-<?php
-namespace Codeception\Module;
+<?php namespace Codeception\Module;
 
 use Codeception\Module;
+use Codeception\Exception\DrupalNotFoundException;
 
 /**
  * Class Drupal
@@ -29,11 +29,14 @@ class Drupal extends Module
 
         // Do a Drush-style bootstrap.
         define('DRUPAL_ROOT', $this->config['root']);
+
         require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        drupal_override_server_variables();
 
         // Bootstrap Drupal.
         drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
+
     }
 
     /**
@@ -50,20 +53,17 @@ class Drupal extends Module
         } else {
             // If a user has passed in a path to their Drupal root, then we'll still need to append the current working
             // directory to it.
-            return codecept_root_dir(DIRECTORY_SEPARATOR . $this->config['root']);
+            return codecept_root_dir($this->config['root']);
         }
     }
 
     /**
      * Validate the provided path as a Drupal root directory.
-     * 
-     * ToDo: Throw a better exception that actually means something.
-     * ToDo: Decide on a better way to determine Drupal root. Searching for index.php is NOT reliable. 
      *
      * @param string $root
      *   The directory to validate.
-     * 
-     * @throws \InvalidArgumentException
+     *
+     * @throws DrupalNotFoundException
      *   If the provided path is not a Drupal root, then an exception will be thrown.
      *
      * @return bool
@@ -71,10 +71,8 @@ class Drupal extends Module
      */
     private function validateDrupalRoot($root)
     {
-        if (!file_exists($root) . '/index.php')
-        {
-            // @mToDo: Stub a more descriptive exception for this.
-            throw new \InvalidArgumentException('Drupal root incorrect.');
+        if (!file_exists($root . '/includes/bootstrap.inc')) {
+            throw new DrupalNotFoundException('Drupal root incorrect.');
         }
 
         return true;
