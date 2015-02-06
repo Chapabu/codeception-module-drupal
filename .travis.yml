@@ -14,8 +14,9 @@ install:
   - composer self-update
   - composer install
 
-# Before running the main test script.
+# Before running the main test script we want to ensure we've installed Drupal and set up Codeception.
 before_script:
+  - testinit.sh
   - vendor/bin/codecept build
 
 script:
