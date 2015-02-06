@@ -33,10 +33,11 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     protected function _before()
     {
-        $this->module = new Codeception\Module\Drupal();
+        $this->module = new Drupal;
         $this->validConfig = Fixtures::get('validModuleConfig');
         $this->invalidConfig = Fixtures::get('invalidModuleConfig');
     }
+
 
     /**
      * @test
