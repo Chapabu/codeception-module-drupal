@@ -59,6 +59,10 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $this->module->_setConfig($this->validConfig);
         $this->module->_initialize();
 
+        if (!function_exists('watchdog_severity_levels')) {
+            $this->fail('Drupal API unavailable');
+        }
+
         $watchdogLevels = watchdog_severity_levels();
 
         $this->assertCount(8, $watchdogLevels, 'Drupal API available');
