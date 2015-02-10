@@ -2,12 +2,13 @@
 
 use Codeception\Module;
 use Codeception\Exception\DrupalNotFoundException;
+use Codeception\Module\DrupalModuleInterface;
 
 /**
  * Class Drupal
  * @package Codeception\Module
  */
-class Drupal7 extends Module
+class Drupal7 extends Module implements DrupalModuleInterface
 {
 
     /**
@@ -23,6 +24,17 @@ class Drupal7 extends Module
     public function _initialize()
     {
 
+        $this->bootstrapDrupal();
+
+    }
+
+    /**
+     * Actually bootstrap Drupal.
+     *
+     * @throws \Codeception\Exception\DrupalNotFoundException
+     */
+    public function bootstrapDrupal()
+    {
         $this->config['root'] = $this->getDrupalRoot();
 
         $this->validateDrupalRoot($this->config['root']);
@@ -35,7 +47,6 @@ class Drupal7 extends Module
 
         // Bootstrap Drupal.
         drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-
     }
 
     /**
@@ -44,7 +55,7 @@ class Drupal7 extends Module
      * @return string
      *   The root directory of the Drupal installation.
      */
-    private function getDrupalRoot()
+    public function getDrupalRoot()
     {
         // We can't get getcwd() as a default parameter, so this will have to do.
         if (is_null($this->config['root'])) {
@@ -68,7 +79,7 @@ class Drupal7 extends Module
      * @return bool
      *   Returns true if the provided path is a Drupal root directory.
      */
-    private function validateDrupalRoot($root)
+    public function validateDrupalRoot($root)
     {
         if (!file_exists($root . '/includes/bootstrap.inc')) {
             throw new DrupalNotFoundException('Drupal root incorrect.');
