@@ -2,21 +2,16 @@
 
 use Codeception\Module;
 use Codeception\Exception\DrupalNotFoundException;
+use Codeception\Module\DrupalBaseModule;
 use Codeception\Module\DrupalModuleInterface;
 
 /**
  * Class Drupal
  * @package Codeception\Module
  */
-class Drupal7 extends Module implements DrupalModuleInterface
+class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 {
 
-    /**
-     * @var array
-     */
-    protected $config = [
-        'root' => null
-    ];
 
     /**
      * { @inheritdoc }
@@ -49,23 +44,6 @@ class Drupal7 extends Module implements DrupalModuleInterface
         drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
     }
 
-    /**
-     * Get the Drupal root directory.
-     *
-     * @return string
-     *   The root directory of the Drupal installation.
-     */
-    public function getDrupalRoot()
-    {
-        // We can't get getcwd() as a default parameter, so this will have to do.
-        if (is_null($this->config['root'])) {
-            return codecept_root_dir();
-        } else {
-            // If a user has passed in a path to their Drupal root, then we'll still need to append the current working
-            // directory to it.
-            return codecept_root_dir($this->config['root']);
-        }
-    }
 
     /**
      * Validate the provided path as a Drupal root directory.
