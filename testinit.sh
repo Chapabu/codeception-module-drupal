@@ -14,10 +14,15 @@ ADMIN_MAIL="null@dev.null"
 PATH_TO_DRUPAL="$PWD/vendor/drupal/drupal"
 MYSQL_URL="mysql://root@localhost/drupal_codeception_test"
 
+echo "$(tput setaf 3)Installing Drupal 7 test site"
+
 ./vendor/bin/drush qd testsites/drupal7 \
     --core=drupal-7.x \
     --account-name=${ADMIN_USER} \
     --account-pass=${ADMIN_PASSWORD} \
     --account-mail=${ADMIN_MAIL} \
     --no-server \
-    -y
+    -y \
+    > /dev/null 2>&1
+
+echo "$(tput setaf 2)Done installing Drupal 7 test site!"
