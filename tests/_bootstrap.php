@@ -4,7 +4,7 @@
 use Codeception\Util\Fixtures;
 
 Fixtures::add('validModuleConfig', [
-  'root' => 'vendor/drupal/drupal'
+  'root' => 'testsites/drupal7/drupal-7.x'
 ]);
 
 Fixtures::add('invalidModuleConfig', [
