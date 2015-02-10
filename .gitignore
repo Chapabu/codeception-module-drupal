@@ -4,3 +4,6 @@
 # Composer
 composer.lock
 /vendor/
+
+# Test data
+testsites
