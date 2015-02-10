@@ -1,6 +1,6 @@
 <?php
 
-use Codeception\Module\Drupal;
+use Codeception\Module\Drupal7\Drupal7 as Drupal;
 use Codeception\Util\Fixtures;
 
 /**

@@ -1,4 +1,4 @@
-<?php namespace Codeception\Module;
+<?php namespace Codeception\Module\Drupal7;
 
 use Codeception\Module;
 use Codeception\Exception\DrupalNotFoundException;
@@ -7,7 +7,7 @@ use Codeception\Exception\DrupalNotFoundException;
  * Class Drupal
  * @package Codeception\Module
  */
-class Drupal extends Module
+class Drupal7 extends Module
 {
 
     /**
@@ -35,7 +35,6 @@ class Drupal extends Module
 
         // Bootstrap Drupal.
         drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-
 
     }
 
