@@ -1,5 +1,6 @@
 <?php namespace Codeception\Module\Drupal7;
 
+use Codeception\Exception\DrupalSubmoduleNotFoundException;
 use Codeception\Module;
 use Codeception\Exception\DrupalNotFoundException;
 use Codeception\Module\DrupalBaseModule;
@@ -73,7 +74,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     /**
      * Load the submodules that should be included with the test suite.
      *
-     * @throws \Codeception\Exception\DrupalSubmoduleNotFoundException
+     * @throws DrupalSubmoduleNotFoundException
      *
      * @param array $modules
      *   The list of Codeception Drupal submodules to be loaded.
@@ -82,7 +83,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     {
         foreach ($modules as $moduleClassName) {
             if (!class_exists($moduleClassName)) {
-                throw new \Codeception\Exception\DrupalSubmoduleNotFoundException($moduleClassName . 'not found.');
+                throw new DrupalSubmoduleNotFoundException($moduleClassName . 'not found.');
             }
 
             $this->getModule($moduleClassName);
