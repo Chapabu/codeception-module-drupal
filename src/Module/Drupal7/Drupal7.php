@@ -12,7 +12,6 @@ use Codeception\Module\DrupalModuleInterface;
 class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 {
 
-
     /**
      * { @inheritdoc }
      */
@@ -43,7 +42,6 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
         // Bootstrap Drupal.
         drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
     }
-
 
     /**
      * Validate the provided path as a Drupal root directory.
