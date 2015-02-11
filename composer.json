@@ -15,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "Codeception\\": "src"
-        }
+        },
+        "files": [
+            "tests/unit/Drupal7/Drupal7AssertionCestBase.php"
+        ]
     },
     "suggest": {
         "chriscohen/codeception-drupal-pages": "A Codeception module to provide standard Drupal page objects.",
