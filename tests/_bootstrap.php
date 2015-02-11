@@ -26,5 +26,4 @@ Fixtures::add('validPathInvalidModules', [
     'submodules' => [
         'entity'
     ]
-
 ]);

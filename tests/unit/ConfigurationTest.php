@@ -50,7 +50,6 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $this->validPathNoModulesConfig = Fixtures::get('validModuleConfigNoModules');
     }
 
-
     /**
      * @test
      */
