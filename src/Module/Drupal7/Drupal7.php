@@ -30,9 +30,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     }
 
     /**
-     * Actually bootstrap Drupal.
-     *
-     * @throws \Codeception\Exception\DrupalNotFoundException
+     * { @inheritdoc }
      */
     public function bootstrapDrupal()
     {
@@ -51,16 +49,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     }
 
     /**
-     * Validate the provided path as a Drupal root directory.
-     *
-     * @param string $root
-     *   The directory to validate.
-     *
-     * @throws DrupalNotFoundException
-     *   If the provided path is not a Drupal root, then an exception will be thrown.
-     *
-     * @return bool
-     *   Returns true if the provided path is a Drupal root directory.
+     * { @inheritdoc }
      */
     public function validateDrupalRoot($root)
     {
@@ -72,12 +61,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     }
 
     /**
-     * Load the submodules that should be included with the test suite.
-     *
-     * @throws DrupalSubmoduleNotFoundException
-     *
-     * @param array $modules
-     *   The list of Codeception Drupal submodules to be loaded.
+     * { @inheritdoc }
      */
     public function loadModules(array $modules = [])
     {
@@ -91,12 +75,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     }
 
     /**
-     * Read the list of modules from the configuration file.
-     *
-     * @see loadModules()
-     *
-     * @return array
-     *   An array of module class names to be passed to loadModules().
+     * { @inheritdoc }
      */
     public function getModulesFromConfig()
     {
@@ -115,13 +94,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     }
 
     /**
-     * Generate the class name used to load a submodule.
-     *
-     * @param $subModuleName
-     *   The submodule name as added in the config file (i.e. entity)
-     *
-     * @return string
-     *   The full class name (i.e. \Codeception\Module\Drupal7\EntitySubModule).
+     * { @inheritdoc }
      */
     public function getClassNameForSubModule($subModuleName)
     {
