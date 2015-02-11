@@ -14,7 +14,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     protected $tester;
 
     /**
-     * @var \Codeception\Module\Drupal
+     * @var \Codeception\Module\Drupal7\Drupal7
      */
     protected $module;
 
@@ -29,6 +29,11 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     protected $invalidConfig = [];
 
     /**
+     * @var array
+     */
+    protected $invalidModuleConfig = [];
+
+    /**
      * { @inheritdoc }
      */
     protected function _before()
@@ -36,6 +41,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $this->module = new Drupal;
         $this->validConfig = Fixtures::get('validModuleConfig');
         $this->invalidConfig = Fixtures::get('invalidModuleConfig');
+        $this->invalidModuleConfig = Fixtures::get('validPathInvalidModules');
     }
 
 
@@ -64,5 +70,26 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $watchdogLevels = watchdog_severity_levels();
 
         $this->assertCount(8, $watchdogLevels, 'Drupal API available');
+    }
+
+    /**
+     * @test
+     */
+    public function it_loads_submodules_from_config()
+    {
+        $this->module->_setConfig($this->validConfig);
+        $this->module->_initialize();
+        // Todo: Work out if I can see which modules are enabled.
+        $this->fail('Test needs finishing');
+    }
+
+    /**
+     * @test
+     */
+    public function it_throws_an_exception_if_module_not_found()
+    {
+        $this->module->_setConfig($this->invalidModuleConfig);
+        $this->setExpectedException('\Codeception\Exception\DrupalSubmoduleNotFoundException');
+        $this->module->_initialize();
     }
 }
