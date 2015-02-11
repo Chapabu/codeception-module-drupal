@@ -34,6 +34,11 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     protected $invalidModuleConfig = [];
 
     /**
+     * @var array
+     */
+    protected $validPathNoModulesConfig = [];
+
+    /**
      * { @inheritdoc }
      */
     protected function _before()
@@ -42,6 +47,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $this->validConfig = Fixtures::get('validModuleConfig');
         $this->invalidConfig = Fixtures::get('invalidModuleConfig');
         $this->invalidModuleConfig = Fixtures::get('validPathInvalidModules');
+        $this->validPathNoModulesConfig = Fixtures::get('validModuleConfigNoModules');
     }
 
 
@@ -60,7 +66,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     public function it_bootstraps_drupal()
     {
-        $this->module->_setConfig($this->validConfig);
+        $this->module->_setConfig($this->validPathNoModulesConfig);
         $this->module->_initialize();
 
         if (!function_exists('watchdog_severity_levels')) {

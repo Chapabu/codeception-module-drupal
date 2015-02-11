@@ -14,7 +14,7 @@ class DbConnectionTest extends \Codeception\TestCase\Test
     protected $tester;
 
     /**
-     * @var \Codeception\Module\Drupal
+     * @var \Codeception\Module\Drupal7\Drupal7
      */
     protected $module;
 
@@ -23,6 +23,11 @@ class DbConnectionTest extends \Codeception\TestCase\Test
      */
     protected $validConfig = [];
 
+    /**
+     * @var array
+     */
+    protected $validPathNoModulesConfig = [];
+
 
     /**
      * { @inheritdoc }
@@ -30,9 +35,10 @@ class DbConnectionTest extends \Codeception\TestCase\Test
     protected function _before()
     {
         $this->validConfig = Fixtures::get('validModuleConfig');
+        $this->validPathNoModulesConfig = Fixtures::get('validModuleConfigNoModules');
 
         $this->module = new Drupal;
-        $this->module->_setConfig($this->validConfig);
+        $this->module->_setConfig($this->validPathNoModulesConfig);
         $this->module->_initialize();
     }
 

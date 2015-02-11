@@ -6,7 +6,7 @@ use Codeception\Util\Fixtures;
 Fixtures::add('validModuleConfig', [
     'root' => 'testsites/drupal7/drupal-7.x',
     'submodules' => [
-        'EntityAssertions'
+        'entity'
     ]
 ]);
 
@@ -17,6 +17,9 @@ Fixtures::add('invalidModuleConfig', [
     ]
 ]);
 
+Fixtures::add('validModuleConfigNoModules', [
+    'root' => 'testsites/drupal7/drupal-7.x',
+]);
 
 Fixtures::add('validPathInvalidModules', [
     'root' => 'testsites/drupal7/drupal-7.x',
