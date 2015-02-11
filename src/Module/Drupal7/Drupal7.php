@@ -20,6 +20,12 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 
         $this->bootstrapDrupal();
 
+        $modules = $this->getModulesFromConfig();
+
+        if (!empty($modules)) {
+            $this->loadModules($modules);
+        }
+
     }
 
     /**
@@ -62,5 +68,62 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
         }
 
         return true;
+    }
+
+    /**
+     * Load the submodules that should be included with the test suite.
+     *
+     * @throws \Codeception\Exception\DrupalSubmoduleNotFoundException
+     *
+     * @param array $modules
+     *   The list of Codeception Drupal submodules to be loaded.
+     */
+    public function loadModules(array $modules = [])
+    {
+        foreach ($modules as $moduleClassName) {
+            if (!class_exists($moduleClassName)) {
+                throw new \Codeception\Exception\DrupalSubmoduleNotFoundException($moduleClassName . 'not found.');
+            }
+
+            $this->getModule($moduleClassName);
+        }
+    }
+
+    /**
+     * Read the list of modules from the configuration file.
+     *
+     * @see loadModules()
+     *
+     * @return array
+     *   An array of module class names to be passed to loadModules().
+     */
+    public function getModulesFromConfig()
+    {
+        // If there weren't any modules added then just return an empty array here.
+        if (is_null($this->config['submodules'])) {
+            return [];
+        }
+
+        $modules = [];
+
+        foreach ($this->config['submodules'] as $subModule) {
+            $modules[] = $this->getClassNameForSubModule($subModule);
+        }
+
+        return $modules;
+    }
+
+    /**
+     * Generate the class name used to load a submodule.
+     *
+     * @param $subModuleName
+     *   The submodule name as added in the config file (i.e. entity)
+     *
+     * @return string
+     *   The full class name (i.e. \Codeception\Module\Drupal7\EntitySubModule).
+     */
+    public function getClassNameForSubModule($subModuleName)
+    {
+        return '\\Codeception\\Module\\Drupal7\\Submodules\\' . ucfirst($subModuleName) . 'Module';
     }
 }
