@@ -1,8 +1,8 @@
 <?php namespace Codeception\Module\Drupal7;
 
+use Codeception\Exception\DrupalNotFoundException;
 use Codeception\Exception\DrupalSubmoduleNotFoundException;
 use Codeception\Module;
-use Codeception\Exception\DrupalNotFoundException;
 use Codeception\Module\DrupalBaseModule;
 use Codeception\Module\DrupalModuleInterface;
 
