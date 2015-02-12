@@ -11,7 +11,9 @@
     "keywords": ["codeception", "test", "testing", "drupal"],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "require": {},
+    "require": {
+        "codeception/codeception": "~2.1"
+    },
     "autoload": {
         "psr-4": {
             "Codeception\\": "src"
@@ -29,7 +31,6 @@
         "pfaocle/codeception-module-drupal-user-registry": "A Codeception module for managing test users."
     },
     "require-dev": {
-        "codeception/codeception": "~2.1",
         "squizlabs/php_codesniffer": "2.1.0",
         "drush/drush": "dev-master#ee7fedf97bdd378efa40d2a587af7aa249334904"
     },
