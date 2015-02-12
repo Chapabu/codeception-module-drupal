@@ -24,6 +24,27 @@ Fixtures::add('validModuleConfigNoModules', [
 Fixtures::add('validPathInvalidModules', [
     'root' => 'testsites/drupal7/drupal-7.x',
     'submodules' => [
-        'entity'
+        'dummy'
     ]
+]);
+
+Fixtures::add('suiteConfigWithSubmodule', [
+    'class_name' => 'NoGuy',
+    'modules' => array(
+        'enabled' => array(
+            'Codeception\Module\Drupal7\Drupal7',
+            'PhpBrowser'
+        ),
+        'config' => array(
+            'Codeception\Module\Drupal7\Drupal7' => Fixtures::get('validModuleConfig'),
+            'PhpBrowser' => array(
+                'url' => '127.0.0.1'
+            )
+        ),
+    ),
+    'namespace' => null,
+    'path' => '',
+    'groups' => [],
+    'suite_class' => '\PHPUnit_Framework_TestSuite',
+    'error_level' => 'E_ALL & ~E_STRICT & ~E_DEPRECATED',
 ]);
