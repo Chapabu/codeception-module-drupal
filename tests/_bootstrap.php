@@ -29,7 +29,7 @@ Fixtures::add('validPathInvalidModules', [
 ]);
 
 Fixtures::add('suiteConfigWithSubmodule', [
-    'class_name' => 'NoGuy',
+    'class_name' => 'HobbitGuy',
     'modules' => array(
         'enabled' => array(
             'Codeception\Module\Drupal7\Drupal7',
@@ -43,7 +43,7 @@ Fixtures::add('suiteConfigWithSubmodule', [
         ),
     ),
     'namespace' => null,
-    'path' => '',
+    'path' => 'tests/shire',
     'groups' => [],
     'suite_class' => '\PHPUnit_Framework_TestSuite',
     'error_level' => 'E_ALL & ~E_STRICT & ~E_DEPRECATED',
