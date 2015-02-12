@@ -39,6 +39,11 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     protected $validPathNoModulesConfig = [];
 
     /**
+     * @var \Codeception\SuiteManager
+     */
+    protected $suiteManager;
+
+    /**
      * { @inheritdoc }
      */
     protected function _before()
@@ -56,6 +61,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     public function it_throws_exception_if_path_to_drupal_is_incorrect()
     {
         $this->module->_setConfig($this->invalidConfig);
+
         $this->setExpectedException('\Codeception\Exception\DrupalNotFoundException', 'Drupal root incorrect.');
         $this->module->_initialize();
     }
@@ -82,10 +88,17 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     public function it_loads_submodules_from_config()
     {
-        $this->module->_setConfig($this->validConfig);
-        $this->module->_initialize();
-        // Todo: Work out if I can see which modules are enabled.
-        $this->fail('Test needs finishing');
+        $this->dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher;
+        $this->suiteManager = new \Codeception\SuiteManager(
+            $this->dispatcher,
+            'testsuite',
+            Fixtures::get('suiteConfigWithSubmodule')
+        );
+
+        // Make the initializeModules method accessible for our test.
+        $initModulesMethod = new ReflectionMethod($this->suiteManager, 'initializeModules');
+        $initModulesMethod->setAccessible(true);
+        $initModulesMethod->invoke($this->suiteManager);
     }
 
     /**

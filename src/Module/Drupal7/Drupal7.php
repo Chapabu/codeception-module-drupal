@@ -5,6 +5,7 @@ use Codeception\Exception\DrupalSubmoduleNotFoundException;
 use Codeception\Module;
 use Codeception\Module\DrupalBaseModule;
 use Codeception\Module\DrupalModuleInterface;
+use Codeception\SuiteManager;
 
 /**
  * Class Drupal
@@ -35,7 +36,6 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     public function bootstrapDrupal()
     {
         $this->config['root'] = $this->getDrupalRoot();
-
         $this->validateDrupalRoot($this->config['root']);
 
         // Do a Drush-style bootstrap.
@@ -66,11 +66,23 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     public function loadModules(array $modules = [])
     {
         foreach ($modules as $moduleClassName) {
+            // If the class doesn't exist, then we want to throw an exception right away.
             if (!class_exists($moduleClassName)) {
-                throw new DrupalSubmoduleNotFoundException($moduleClassName . 'not found.');
+                throw new DrupalSubmoduleNotFoundException($moduleClassName . ' not found.');
             }
 
-            $this->getModule($moduleClassName);
+            // Reflect on the class we've reached...
+            $moduleReflection = new \ReflectionClass($moduleClassName);
+
+            // ...and ensure it's actually a Codeception module.
+            if ($moduleReflection->getParentClass()->getName() === 'Codeception\Module') {
+                // We want to remove the slash from the beginning of the class name for the array key.
+                $trimmedClassName = trim($moduleClassName, '\\');
+
+                // Ensure that the current test suite knows about our new modules, and then initialise them.
+                SuiteManager::$modules[$trimmedClassName] = new $moduleClassName;
+                SuiteManager::$modules[$trimmedClassName]->_initialize();
+            }
         }
     }
 
@@ -86,6 +98,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 
         $modules = [];
 
+        // Loop over each module option and get an actual class name.
         foreach ($this->config['submodules'] as $subModule) {
             $modules[] = $this->getClassNameForSubModule($subModule);
         }
@@ -98,6 +111,6 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
      */
     public function getClassNameForSubModule($subModuleName)
     {
-        return '\\Codeception\\Module\\Drupal7\\Submodules\\' . ucfirst($subModuleName) . 'Module';
+        return '\\Codeception\\Module\\Drupal7\\Submodules\\' . ucfirst($subModuleName) . 'SubModule';
     }
 }
