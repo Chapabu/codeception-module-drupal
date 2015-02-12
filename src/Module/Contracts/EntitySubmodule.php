@@ -1,4 +1,4 @@
-<?php namespace Codeception\Module\Drupal7\Contracts;
+<?php namespace Codeception\Module\Contracts;
 
 /**
  * Interface EntitySubmodule
