@@ -20,7 +20,10 @@ before_script:
   - vendor/bin/codecept build
 
 script:
-  - vendor/bin/codecept run
+  - vendor/bin/codecept run --coverage --coverage-xml
+
+after_script:
+  - vendor/bin/coveralls
 
 # Whitelist branches to test.
 branches:

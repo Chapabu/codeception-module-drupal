@@ -32,7 +32,8 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.1.0",
-        "drush/drush": "dev-master#ee7fedf97bdd378efa40d2a587af7aa249334904"
+        "drush/drush": "dev-master#ee7fedf97bdd378efa40d2a587af7aa249334904",
+        "satooshi/php-coveralls": "dev-master"
     },
     "repositories": [
         {

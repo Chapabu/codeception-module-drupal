@@ -1,0 +1,4 @@
+# for php-coveralls
+src_dir: src
+coverage_clover: tests/_output/coverage.xml
+json_path: tests/_output/clover-coverage.json
