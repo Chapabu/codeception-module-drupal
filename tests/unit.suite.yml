@@ -3,4 +3,10 @@
 # suite for unit (internal) tests.
 class_name: UnitTester
 modules:
-    enabled: [Asserts, UnitHelper, \Codeception\Module\Drupal7\Drupal7]
+    enabled:
+        - Asserts
+        - UnitHelper
+        - \Codeception\Module\Drupal7\Drupal7
+    config:
+        \Codeception\Module\Drupal7\Drupal7:
+            root: testsites/drupal7/drupal-7.x
