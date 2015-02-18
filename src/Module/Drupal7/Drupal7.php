@@ -2,6 +2,7 @@
 
 use Codeception\Exception\DrupalNotFoundException;
 use Codeception\Module;
+use Codeception\Module\Drupal7\Submodules\EntityTrait;
 use Codeception\Module\DrupalBaseModule;
 use Codeception\Module\DrupalModuleInterface;
 
@@ -11,6 +12,8 @@ use Codeception\Module\DrupalModuleInterface;
  */
 class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 {
+
+    use EntityTrait;
 
     /**
      * { @inheritdoc }
