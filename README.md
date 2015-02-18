@@ -3,7 +3,7 @@
 # Please note that this module is under very VERY early development, and as such this readme may be incomplete or inconsistent.
 
 [![Build Status](https://travis-ci.org/Chapabu/codeception-module-drupal.svg?branch=master)](https://travis-ci.org/Chapabu/codeception-module-drupal) 
-[![Coverage Status](https://coveralls.io/repos/Chapabu/codeception-module-drupal/badge.svg)](https://coveralls.io/r/Chapabu/codeception-module-drupal)
+[![Coverage Status](https://coveralls.io/repos/Chapabu/codeception-module-drupal/badge.svg?branch=master)](https://coveralls.io/r/Chapabu/codeception-module-drupal?branch=master)
 
 This Codeception module aims to allow tests to use the Drupal API during testing. This allows for better functional testing of your Drupal sites.
 
