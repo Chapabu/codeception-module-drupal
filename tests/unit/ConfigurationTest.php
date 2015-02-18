@@ -1,6 +1,7 @@
 <?php
 
 use Codeception\Module\Drupal7\Drupal7 as Drupal;
+use Codeception\SuiteManager;
 use Codeception\Util\Fixtures;
 
 /**
@@ -29,17 +30,13 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     protected $invalidConfig = [];
 
     /**
-     * @var array
-     */
-    protected $invalidModuleConfig = [];
-
-
-    /**
      * { @inheritdoc }
      */
-    protected function _before()
+    protected function setUp()
     {
-        $this->module = new Drupal;
+        parent::setUp();
+
+        $this->module = SuiteManager::$modules['\Codeception\Module\Drupal7\Drupal7'];
         $this->validConfig = Fixtures::get('validModuleConfig');
         $this->invalidConfig = Fixtures::get('invalidModuleConfig');
     }
@@ -49,8 +46,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     public function it_throws_exception_if_path_to_drupal_is_incorrect()
     {
-        $this->module->_setConfig($this->invalidConfig);
-
+        $this->module->_reconfigure($this->invalidConfig);
         $this->setExpectedException('\Codeception\Exception\DrupalNotFoundException', 'Drupal root incorrect.');
         $this->module->_initialize();
     }
@@ -60,8 +56,6 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     public function it_bootstraps_drupal()
     {
-        $this->module->_setConfig($this->validConfig);
-        $this->module->_initialize();
 
         if (!function_exists('watchdog_severity_levels')) {
             $this->fail('Drupal API unavailable');
@@ -70,5 +64,10 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $watchdogLevels = watchdog_severity_levels();
 
         $this->assertCount(8, $watchdogLevels, 'Drupal API available');
+    }
+
+    public function tearDown()
+    {
+        $this->module->_resetConfig();
     }
 }
