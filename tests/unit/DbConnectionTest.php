@@ -35,10 +35,9 @@ class DbConnectionTest extends \Codeception\TestCase\Test
     protected function _before()
     {
         $this->validConfig = Fixtures::get('validModuleConfig');
-        $this->validPathNoModulesConfig = Fixtures::get('validModuleConfigNoModules');
 
         $this->module = new Drupal;
-        $this->module->_setConfig($this->validPathNoModulesConfig);
+        $this->module->_setConfig($this->validConfig);
         $this->module->_initialize();
     }
 
@@ -47,6 +46,10 @@ class DbConnectionTest extends \Codeception\TestCase\Test
      */
     public function it_can_access_the_database()
     {
+        if (!function_exists('entity_get_info')) {
+            $this->fail('Drupal not bootstrapped.');
+        }
+
         $entityInfo = entity_get_info();
 
         $this->assertCount(6, $entityInfo, 'Entity info returned.');

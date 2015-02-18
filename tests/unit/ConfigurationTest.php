@@ -33,15 +33,6 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     protected $invalidModuleConfig = [];
 
-    /**
-     * @var array
-     */
-    protected $validPathNoModulesConfig = [];
-
-    /**
-     * @var \Codeception\SuiteManager
-     */
-    protected $suiteManager;
 
     /**
      * { @inheritdoc }
@@ -51,8 +42,6 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $this->module = new Drupal;
         $this->validConfig = Fixtures::get('validModuleConfig');
         $this->invalidConfig = Fixtures::get('invalidModuleConfig');
-        $this->invalidModuleConfig = Fixtures::get('validPathInvalidModules');
-        $this->validPathNoModulesConfig = Fixtures::get('validModuleConfigNoModules');
     }
 
     /**
@@ -71,7 +60,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      */
     public function it_bootstraps_drupal()
     {
-        $this->module->_setConfig($this->validPathNoModulesConfig);
+        $this->module->_setConfig($this->validConfig);
         $this->module->_initialize();
 
         if (!function_exists('watchdog_severity_levels')) {
@@ -81,33 +70,5 @@ class ConfigurationTest extends \Codeception\TestCase\Test
         $watchdogLevels = watchdog_severity_levels();
 
         $this->assertCount(8, $watchdogLevels, 'Drupal API available');
-    }
-
-    /**
-     * @test
-     */
-    public function it_loads_submodules_from_config()
-    {
-        $this->dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher;
-        $this->suiteManager = new \Codeception\SuiteManager(
-            $this->dispatcher,
-            'testsuite',
-            Fixtures::get('suiteConfigWithSubmodule')
-        );
-
-        // Make the initializeModules method accessible for our test.
-        $initModulesMethod = new ReflectionMethod($this->suiteManager, 'initializeModules');
-        $initModulesMethod->setAccessible(true);
-        $initModulesMethod->invoke($this->suiteManager);
-    }
-
-    /**
-     * @test
-     */
-    public function it_throws_an_exception_if_module_not_found()
-    {
-        $this->module->_setConfig($this->invalidModuleConfig);
-        $this->setExpectedException('\Codeception\Exception\DrupalSubmoduleNotFoundException');
-        $this->module->_initialize();
     }
 }
