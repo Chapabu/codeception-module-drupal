@@ -16,4 +16,14 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
         $I->assertContains('base table', $entityInfo);
         $I->assertEquals($entityInfo['base table'], 'node');
     }
+
+    public function it_can_check_if_an_entity_exists(UnitTester $I)
+    {
+        $I->seeEntityExists('node');
+    }
+
+    public function it_can_see_if_an_entity_does_not_exist(UnitTester $I)
+    {
+        $I->dontSeeEntityExists('fake_entity');
+    }
 }

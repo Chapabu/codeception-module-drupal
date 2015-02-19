@@ -1,5 +1,6 @@
 <?php namespace Codeception\Module\Drupal7\Submodules;
 
+use Codeception\Util\Shared\Asserts;
 
 /**
  * Class EntityTrait
@@ -7,6 +8,8 @@
  */
 trait EntityTrait
 {
+    use Asserts;
+
     /**
      * Grab the output of entity_get_info().
      *
@@ -24,6 +27,15 @@ trait EntityTrait
 
     public function seeEntityExists($entityMachineName)
     {
+        $entity = $this->grabEntityInfo($entityMachineName);
 
+        $this->assertNotNull($entity);
+    }
+
+    public function dontSeeEntityExists($entityMachineName)
+    {
+        $entity = $this->grabEntityInfo($entityMachineName);
+
+        $this->assertNull($entity);
     }
 }
