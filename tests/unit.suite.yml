@@ -6,6 +6,7 @@ modules:
     enabled:
         - Asserts
         - UnitHelper
+        - Mockery
         - \Codeception\Module\Drupal7\Drupal7
     config:
         \Codeception\Module\Drupal7\Drupal7:
