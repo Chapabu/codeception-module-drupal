@@ -3,6 +3,7 @@
 use Codeception\Module\Drupal7\Drupal7 as Drupal;
 use Codeception\SuiteManager;
 use Codeception\Util\Fixtures;
+use Mockery as Mock;
 
 /**
  * Class ConfigurationTest
@@ -54,6 +55,15 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     /**
      * @test
      */
+    public function it_returns_true_if_drupal_root_is_valid()
+    {
+        $validRoot = $this->module->validateDrupalRoot($this->validConfig['root']);
+        $this->assertTrue($validRoot);
+    }
+
+    /**
+     * @test
+     */
     public function it_bootstraps_drupal()
     {
 
@@ -69,5 +79,6 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     public function tearDown()
     {
         $this->module->_resetConfig();
+        Mock::close();
     }
 }
