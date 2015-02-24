@@ -63,9 +63,13 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        if (!array_key_exists($bundleMachineName, $entityInfo['bundles'])) {
-            $this->fail('Bundle ' . $bundleMachineName . ' does not exist on the ' . $entityMachineName . ' entity.');
+        if (array_key_exists($bundleMachineName, $entityInfo['bundles'])) {
+            return true;
         }
+
+        $failMessage = 'Bundle ' . $bundleMachineName . ' does not exist on the ' . $entityMachineName . ' entity.';
+
+        return $this->fail($failMessage);
     }
 
     /**
@@ -80,8 +84,12 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        if (array_key_exists($bundleMachineName, $entityInfo['bundles'])) {
-            $this->fail('Bundle ' . $bundleMachineName . ' exists on the ' . $entityMachineName . ' entity.');
+        if (!array_key_exists($bundleMachineName, $entityInfo['bundles'])) {
+            return true;
         }
+
+        $failMessage = 'Bundle ' . $bundleMachineName . ' exists on the ' . $entityMachineName . ' entity.';
+
+        return $this->fail($failMessage);
     }
 }
