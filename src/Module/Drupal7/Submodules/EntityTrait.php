@@ -132,4 +132,46 @@ trait EntityTrait
 
         $this->assertNotContains($baseField, $entityInfo[$schemaKey][$baseField]);
     }
+
+    /**
+     * Check that an entity type has a view mode assigned.
+     *
+     * @param string $entityMachineName
+     *    The machine name of the entity you are testing (i.e. node)
+     * @param string $viewModeMachineName
+     *    The machine name of the view mode you are looking for (i.e. teaser)
+     */
+    public function seeEntityHasViewMode($entityMachineName, $viewModeMachineName)
+    {
+        $entityInfo = $this->grabEntityInfo($entityMachineName);
+
+        if (array_key_exists($viewModeMachineName, $entityInfo['view modes'])) {
+            return;
+        }
+
+        $message = $entityMachineName . ' has no view mode ' . $viewModeMachineName;
+
+        $this->fail($message);
+    }
+
+    /**
+     * Check that an entity type doesn't have a specific view mode assigned.
+     *
+     * @param string $entityMachineName
+     *    The machine name of the entity you are testing (i.e. node)
+     * @param string $viewModeMachineName
+     *    The machine name of the view mode you are looking for (i.e. teaser)
+     */
+    public function dontSeeEntityHasViewMode($entityMachineName, $viewModeMachineName)
+    {
+        $entityInfo = $this->grabEntityInfo($entityMachineName);
+
+        if (!array_key_exists($viewModeMachineName, $entityInfo['view modes'])) {
+            return;
+        }
+
+        $message = $entityMachineName . ' has view mode ' . $viewModeMachineName;
+
+        $this->fail($message);
+    }
 }

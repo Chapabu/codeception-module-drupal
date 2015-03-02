@@ -63,4 +63,40 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
 
         $I->fail('dontSeeEntityHasBundle does not fail with an existing bundle');
     }
+
+    public function it_can_check_if_an_entity_has_a_view_mode(UnitTester $I)
+    {
+        $I->seeEntityHasViewMode('node', 'full');
+        $I->seeEntityHasViewMode('node', 'teaser');
+        $I->seeEntityHasViewMode('taxonomy_term', 'full');
+        $I->seeEntityHasViewMode('user', 'full');
+    }
+
+    public function see_fails_if_an_entity_does_not_have_a_view_mode(UnitTester $I)
+    {
+        try {
+            $I->seeEntityHasViewMode('user', 'teaser');
+        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
+            return;
+        }
+
+        $I->fail('seeEntityHasViewMode does not fail with an existing bundle');
+    }
+
+    public function it_can_check_if_an_entity_does_not_have_a_view_mode(UnitTester $I)
+    {
+        $I->dontSeeEntityHasViewMode('user', 'teaser');
+        $I->dontSeeEntityHasViewMode('taxonomy_term', 'teaser');
+    }
+
+    public function dont_see_fails_if_an_entity_has_a_view_mode(UnitTester $I)
+    {
+        try {
+            $I->dontSeeEntityHasViewMode('node', 'full');
+        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
+            return;
+        }
+
+        $I->fail('seeEntityHasViewMode does not fail with an existing bundle');
+    }
 }
