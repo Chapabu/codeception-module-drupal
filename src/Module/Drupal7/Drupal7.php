@@ -3,6 +3,7 @@
 use Codeception\Exception\DrupalNotFoundException;
 use Codeception\Module;
 use Codeception\Module\Drupal7\Submodules\EntityTrait;
+use Codeception\Module\Drupal7\Submodules\FieldTrait;
 use Codeception\Module\DrupalBaseModule;
 use Codeception\Module\DrupalModuleInterface;
 
@@ -14,7 +15,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 {
 
     use EntityTrait;
-
+    use FieldTrait;
     /**
      * { @inheritdoc }
      */
