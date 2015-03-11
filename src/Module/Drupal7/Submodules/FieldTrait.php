@@ -40,7 +40,7 @@ trait FieldTrait
      * @param string $bundleName
      *   The bundle name you are looking on.
      * @return array|null
-     *   An array containing the output of field_info_instance.
+     *   An array containing the output of field_info_instance or null if the field instance doesn't exist.
      */
     public function grabFieldInstance($entityType, $fieldName, $bundleName)
     {
