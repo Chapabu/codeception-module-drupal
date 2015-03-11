@@ -1,14 +1,11 @@
 <?php namespace Codeception\Module\Drupal7\Submodules;
 
-use Codeception\Util\Shared\Asserts;
-
 /**
  * Class EntityTrait
  * @package Codeception\Module\Drupal7\Submodules
  */
 trait EntityTrait
 {
-    use Asserts;
 
     /**
      * Grab the output of entity_get_info().

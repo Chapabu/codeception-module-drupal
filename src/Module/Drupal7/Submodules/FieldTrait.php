@@ -1,14 +1,11 @@
 <?php namespace Codeception\Module\Drupal7\Submodules;
 
-use Codeception\Util\Shared\Asserts;
-
 /**
  * Class FieldTrait
  * @package Codeception\Module\Drupal7\Submodules
  */
 trait FieldTrait
 {
-    use Asserts;
 
     /**
      * Grab a list of all fields.
