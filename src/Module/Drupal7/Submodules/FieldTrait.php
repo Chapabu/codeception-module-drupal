@@ -8,7 +8,6 @@ use Codeception\Util\Shared\Asserts;
  */
 trait FieldTrait
 {
-
     use Asserts;
 
     /**
@@ -33,9 +32,28 @@ trait FieldTrait
     }
 
     /**
+     * Grab the information about a field instance attached to a bundle.
+     *
+     * This is simple a wrapper around field_info_instance.
+     *
+     * @param string $entityType
+     *   The entity type the bundle is attached to.
+     * @param string $fieldName
+     *   The field name (i.e. field_image)
+     * @param string $bundleName
+     *   The bundle name you are looking on.
+     * @return array|null
+     *   An array containing the output of field_info_instance.
+     */
+    public function grabFieldInstance($entityType, $fieldName, $bundleName)
+    {
+        return field_info_instance($entityType, $fieldName, $bundleName);
+    }
+
+    /**
      * Check that a field base exists.
      *
-     * @param $fieldName
+     * @param string $fieldName
      *   The field name you are looking for (i.e. field_image).
      */
     public function seeFieldExists($fieldName)
@@ -48,7 +66,7 @@ trait FieldTrait
     /**
      * Check that a field base does not exist.
      *
-     * @param $fieldName
+     * @param string $fieldName
      *   The field name you are looking for (i.e. field_image).
      */
     public function dontSeeFieldExists($fieldName)
@@ -56,5 +74,43 @@ trait FieldTrait
         $fieldList = $this->grabFieldList();
 
         $this->assertNotContains($fieldName, array_keys($fieldList));
+    }
+
+    /**
+     * Check that an entity bundle has a field instance attached.
+     *
+     * @param string $entityType
+     *   The entity type the bundle is attached to.
+     * @param string $fieldName
+     *   The field name (i.e. field_image)
+     * @param string $bundleName
+     *   The bundle name you are looking on.
+     *
+     * @return void
+     */
+    public function seeBundleHasField($entityType, $fieldName, $bundleName)
+    {
+        $fieldInfo = $this->grabFieldInstance($entityType, $fieldName, $bundleName);
+
+        $this->assertNotNull($fieldInfo);
+    }
+
+    /**
+     * Check that an entity bundle does not have a field instance attached.
+     *
+     * @param string $entityType
+     *   The entity type the bundle is attached to.
+     * @param string $fieldName
+     *   The field name (i.e. field_image)
+     * @param string $bundleName
+     *   The bundle name you are looking on.
+     *
+     * @return void
+     */
+    public function dontSeeBundleHasField($entityType, $fieldName, $bundleName)
+    {
+        $fieldInfo = $this->grabFieldInstance($entityType, $fieldName, $bundleName);
+
+        $this->assertNull($fieldInfo);
     }
 }
