@@ -7,6 +7,17 @@ namespace Codeception\Module;
 class UnitHelper extends \Codeception\Module
 {
 
+    /**
+     * Assert that a countable item matches an expected amount.
+     *
+     * @param $countable
+     *   The countable item that should be compared.
+     * @param $expected
+     *   The expected count() result.
+     * @param string $message
+     *   The message that should be shown in the event of a failure.
+     * @return mixed
+     */
     public function assertCount($countable, $expected, $message = '')
     {
         if (!is_int($expected)) {
@@ -18,5 +29,46 @@ class UnitHelper extends \Codeception\Module
         }
 
         return $this->assertEquals(count($countable), $expected, $message);
+    }
+
+    /**
+     * Check that an exception is thrown.
+     *
+     * @param $exception
+     *   The class name name of the exception you are expecting (i.e. PHPUnit_Framework_AssertionFailedError)
+     * @param $function
+     *   A closure containing the code that should throw the expected exception.
+     * @return bool
+     *   True if the exception was thrown, false if not.
+     */
+    public function seeExceptionThrown($exception, $function)
+    {
+        try {
+            $function();
+            return false;
+        } catch (\Exception $e) {
+            if (get_class($e) === $exception) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Assert that a Codeception assertion should fail.
+     * // ToDo: Find out the PHPDoc param value for a closure.
+     * @param $function
+     *   A closure containing the code that should fail.
+     *
+     * @return void
+     */
+    public function shouldFail($function)
+    {
+        $this->assertTrue(
+            $this->seeExceptionThrown(
+                'PHPUnit_Framework_AssertionFailedError',
+                $function
+            )
+        );
     }
 }
