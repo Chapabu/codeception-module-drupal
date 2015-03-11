@@ -38,13 +38,9 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
 
     public function see_fails_if_looking_for_a_non_existent_bundle(UnitTester $I)
     {
-        try {
+        $I->shouldFail(function() use ($I) {
             $I->seeEntityHasBundle('node', 'fakebundle');
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            return;
-        }
-
-        $I->fail('seeEntityHasBundle does not fail with a non-existent bundle');
+        });
     }
 
     public function it_can_check_if_an_entity_does_not_have_a_bunde(UnitTester $I)
@@ -55,13 +51,9 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
 
     public function dont_see_fails_if_looking_for_an_existing_bundle(UnitTester $I)
     {
-        try {
+        $I->shouldFail(function () use ($I) {
             $I->dontSeeEntityHasBundle('node', 'article');
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            return;
-        }
-
-        $I->fail('dontSeeEntityHasBundle does not fail with an existing bundle');
+        });
     }
 
     public function it_can_check_if_an_entity_has_a_view_mode(UnitTester $I)
@@ -74,13 +66,10 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
 
     public function see_fails_if_an_entity_does_not_have_a_view_mode(UnitTester $I)
     {
-        try {
-            $I->seeEntityHasViewMode('user', 'teaser');
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            return;
-        }
 
-        $I->fail('seeEntityHasViewMode does not fail with an existing bundle');
+        $I->shouldFail(function() use ($I) {
+            $I->seeEntityHasViewMode('user', 'teaser');
+        });
     }
 
     public function it_can_check_if_an_entity_does_not_have_a_view_mode(UnitTester $I)
@@ -91,12 +80,8 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
 
     public function dont_see_fails_if_an_entity_has_a_view_mode(UnitTester $I)
     {
-        try {
+        $I->shouldFail(function () use ($I) {
             $I->dontSeeEntityHasViewMode('node', 'full');
-        } catch (\PHPUnit_Framework_AssertionFailedError $e) {
-            return;
-        }
-
-        $I->fail('seeEntityHasViewMode does not fail with an existing bundle');
+        });
     }
 }
