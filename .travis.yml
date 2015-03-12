@@ -13,7 +13,6 @@ php:
 env:
   - CODECEPTION_VERSION="2.0.*" DRUPAL_VERSION="drupal-7.20"
   - CODECEPTION_VERSION="2.0.*" DRUPAL_VERSION="drupal-7.x"
-  - CODECEPTION_VERSION="2.1.*" DRUPAL_VERSION="drupal-7.20"
   - CODECEPTION_VERSION="2.1.*" DRUPAL_VERSION="drupal-7.x"
 
 # This builds the environment.
@@ -24,7 +23,8 @@ install:
 
 # Before running the main test script we want to ensure we've installed Drupal and set up Codeception.
 before_script:
-  - vendor/bin/drush qd --core=${DRUPAL_VERSION} --account-name=admin --account-pass=admin --account-mail="null@dev.null" --no-server -y > /dev/null 2>&1
+  - drush --version
+  - vendor/bin/drush qd testsites/drupal7 --core=${DRUPAL_VERSION} --account-name=admin --account-pass=admin --account-mail=null@dev.null --no-server -y > /dev/null 2>&1
   - vendor/bin/codecept build
 
 script:
