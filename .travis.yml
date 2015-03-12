@@ -34,7 +34,7 @@ install:
   - composer install
   # Download Drupal and get it up and running.
   - drush dl ${DRUPAL_VERSION} --destination=/var/www --drupal-project-rename=drupal
-  - drush site-install -y --db-url=mysql://root@localhost/travis_drupal --db-su='root' --db-su-pass='' -r /var/www/drupal
+  - drush site-install -y --db-url=mysql://root@localhost/travis_drupal --db-su='root' --db-su-pw='' -r /var/www/drupal
 
 before_script:
   # Move the Travis config into place.
