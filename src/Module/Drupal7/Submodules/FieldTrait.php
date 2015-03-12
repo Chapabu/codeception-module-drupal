@@ -23,9 +23,7 @@ trait FieldTrait
             return field_info_field_map();
         }
 
-        // ToDo: Double check that this will work in Drupal 7 < 7.22
-        $cache = _field_info_field_cache();
-        return $cache->getFieldMap();
+        // ToDo: Implement manual fallback for Drupal < 7.22.
     }
 
     /**
