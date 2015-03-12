@@ -25,6 +25,9 @@ install:
 before_script:
   - vendor/bin/drush dl ${DRUPAL_VERSION} --drupal-project-rename=testsites/drupal > /dev/null 2>&1 &
   - vendor/bin/drush qd --root=testsites/drupal --use-existing --account-name=admin --account-pass=admin --no-server -y > /dev/null 2>&1 &
+  - ls -la
+  - ls -la testsites
+  - ls -la testsites/drupal
   - vendor/bin/codecept build
 
 script:
