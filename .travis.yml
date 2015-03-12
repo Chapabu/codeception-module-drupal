@@ -36,10 +36,10 @@ install:
   - drush dl ${DRUPAL_VERSION} --destination=/var/www --drupal-project-rename=drupal
   - drush site-install -y --db-url=mysql://root@localhost/travis_drupal --db-su='root' --db-su-pass='' -r /var/www/drupal
 
-# Before running the main test script we want to ensure we've installed Drupal and set up Codeception.
 before_script:
   # Move the Travis config into place.
   - mv travis.unit.suite.yml tests/unit.suite.yml
+  # Prepare Codeception to run.
   - vendor/bin/codecept build
 
 script:
