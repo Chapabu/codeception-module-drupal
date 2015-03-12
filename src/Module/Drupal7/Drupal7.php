@@ -53,7 +53,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
     public function validateDrupalRoot($root)
     {
         if (!file_exists($root . '/includes/bootstrap.inc')) {
-            throw new DrupalNotFoundException('Drupal root incorrect.');
+            throw new DrupalNotFoundException('Drupal not found at ' . $root . '.');
         }
 
         return true;
