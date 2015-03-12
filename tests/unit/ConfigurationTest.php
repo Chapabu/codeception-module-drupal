@@ -53,7 +53,7 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     public function it_throws_exception_if_path_to_drupal_is_incorrect()
     {
         $this->module->_reconfigure($this->invalidConfig);
-        $this->setExpectedException('\Codeception\Exception\DrupalNotFoundException', 'Drupal root incorrect.');
+        $this->setExpectedException('\Codeception\Exception\DrupalNotFoundException');
         $this->module->_initialize();
     }
 

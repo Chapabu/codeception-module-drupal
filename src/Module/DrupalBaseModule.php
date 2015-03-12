@@ -22,9 +22,12 @@ abstract class DrupalBaseModule extends Module
         // We can't get getcwd() as a default parameter, so this will have to do.
         if (is_null($this->config['root'])) {
             return codecept_root_dir();
+        }
+
+        // Allow a user to pass an relative or an absolute path.
+        if (is_null($this->config['relative']) || $this->config['relative'] !== 'yes') {
+            return $this->config['root'];
         } else {
-            // If a user has passed in a path to their Drupal root, then we'll still need to append the current working
-            // directory to it.
             return codecept_root_dir($this->config['root']);
         }
     }

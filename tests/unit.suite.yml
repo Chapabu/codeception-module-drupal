@@ -11,3 +11,4 @@ modules:
     config:
         \Codeception\Module\Drupal7\Drupal7:
             root: testsites/drupal7/drupal-7.x
+            relative: yes
