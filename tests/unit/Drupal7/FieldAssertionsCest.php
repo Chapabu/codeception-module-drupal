@@ -45,4 +45,30 @@ class FieldAssertionsCest extends Drupal7AssertionCestBase
             $I->dontSeeFieldExists('field_image');
         });
     }
+
+    public function it_can_see_if_a_bundle_has_a_field(UnitTester $I)
+    {
+        $I->seeBundleHasField('node', 'field_image', 'article');
+    }
+
+    public function it_fails_if_a_bundle_has_no_field_when_it_should(UnitTester $I)
+    {
+        $I->shouldFail(function () use ($I) {
+            $I->seeBundleHasField('node', 'field_fixture', 'article');
+        });
+    }
+
+    public function it_can_see_if_a_bundle_does_not_have_a_field(UnitTester $I)
+    {
+        $I->dontSeeBundleHasField('node', 'field_fixture', 'article');
+    }
+
+    public function it_fails_if_a_bundle_has_a_field_when_it_should_not(UnitTester $I)
+    {
+        $I->shouldFail(function () use ($I) {
+            $I->dontSeeBundleHasField('node', 'field_image', 'article');
+        });
+    }
+
+
 }
