@@ -32,6 +32,36 @@ class UnitHelper extends \Codeception\Module
     }
 
     /**
+     * Assert that a Codeception assertion should fail.
+     *
+     * @param callable $function
+     *   A closure containing the code that should fail.
+     *
+     * @return void
+     */
+    public function shouldFail($function)
+    {
+
+        $result = false;
+
+        $assertionFailed = $this->seeExceptionThrown(
+            'PHPUnit_Framework_AssertionFailedError',
+            $function
+        );
+
+        $expectationFailed = $this->seeExceptionThrown(
+            'PHPUnit_Framework_ExpectationFailedException',
+            $function
+        );
+
+        if ($assertionFailed || $expectationFailed) {
+            $result = true;
+        }
+
+        $this->assertTrue($result);
+    }
+
+    /**
      * Check that an exception is thrown.
      *
      * @param $exception
@@ -52,23 +82,5 @@ class UnitHelper extends \Codeception\Module
             }
             return false;
         }
-    }
-
-    /**
-     * Assert that a Codeception assertion should fail.
-     * // ToDo: Find out the PHPDoc param value for a closure.
-     * @param $function
-     *   A closure containing the code that should fail.
-     *
-     * @return void
-     */
-    public function shouldFail($function)
-    {
-        $this->assertTrue(
-            $this->seeExceptionThrown(
-                'PHPUnit_Framework_AssertionFailedError',
-                $function
-            )
-        );
     }
 }
