@@ -49,13 +49,11 @@ install:
   - drush site-install -y --db-url=mysql://root@localhost/travis_drupal --db-su='root' --db-su-pw='' -r /var/www/drupal
 
 before_script:
-  # Move the Travis config into place.
-  - mv travis.unit.suite.yml tests/unit.suite.yml
   # Prepare Codeception to run.
   - vendor/bin/codecept build
 
 script:
-  - vendor/bin/codecept run --coverage --coverage-xml
+  - vendor/bin/codecept run --coverage --coverage-xml --env=travis
 
 after_script:
   - vendor/bin/coveralls
