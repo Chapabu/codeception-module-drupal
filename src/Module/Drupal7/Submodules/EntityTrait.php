@@ -8,6 +8,19 @@ trait EntityTrait
 {
 
     /**
+     * Check that an entity type exists.
+     *
+     * @param string $entityMachineName
+     *   The machine name of the entity you are testing for (i.e. node)
+     */
+    public function seeEntityExists($entityMachineName)
+    {
+        $entity = $this->grabEntityInfo($entityMachineName);
+
+        $this->assertNotNull($entity);
+    }
+
+    /**
      * Grab the output of entity_get_info().
      *
      * @param null $entityType
@@ -20,19 +33,6 @@ trait EntityTrait
     public function grabEntityInfo($entityType = null)
     {
         return entity_get_info($entityType);
-    }
-
-    /**
-     * Check that an entity type exists.
-     *
-     * @param string $entityMachineName
-     *   The machine name of the entity you are testing for (i.e. node)
-     */
-    public function seeEntityExists($entityMachineName)
-    {
-        $entity = $this->grabEntityInfo($entityMachineName);
-
-        $this->assertNotNull($entity);
     }
 
     /**
@@ -63,13 +63,7 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        if (array_key_exists($bundleMachineName, $entityInfo['bundles'])) {
-            return;
-        }
-
-        $failMessage = 'Bundle ' . $bundleMachineName . ' does not exist on the ' . $entityMachineName . ' entity.';
-
-        $this->fail($failMessage);
+        $this->assertContains($bundleMachineName, array_keys($entityInfo['bundles']));
     }
 
     /**
@@ -87,13 +81,7 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        if (!array_key_exists($bundleMachineName, $entityInfo['bundles'])) {
-            return;
-        }
-
-        $failMessage = 'Bundle ' . $bundleMachineName . ' exists on the ' . $entityMachineName . ' entity.';
-
-        $this->fail($failMessage);
+        $this->assertNotContains($bundleMachineName, array_keys($entityInfo['bundles']));
     }
 
     /**
@@ -142,13 +130,7 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        if (array_key_exists($viewModeMachineName, $entityInfo['view modes'])) {
-            return;
-        }
-
-        $message = $entityMachineName . ' has no view mode ' . $viewModeMachineName;
-
-        $this->fail($message);
+        $this->assertContains($viewModeMachineName, array_keys($entityInfo['view modes']));
     }
 
     /**
@@ -163,12 +145,6 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        if (!array_key_exists($viewModeMachineName, $entityInfo['view modes'])) {
-            return;
-        }
-
-        $message = $entityMachineName . ' has view mode ' . $viewModeMachineName;
-
-        $this->fail($message);
+        $this->assertNotContains($viewModeMachineName, array_keys($entityInfo['view modes']));
     }
 }
