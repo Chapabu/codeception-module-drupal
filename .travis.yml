@@ -23,7 +23,7 @@ install:
 
 # Before running the main test script we want to ensure we've installed Drupal and set up Codeception.
 before_script:
-  - vendor/bin/drush dl ${DRUPAL_VERSION} --drupal-project-rename=testsites/drupal
+  - vendor/bin/drush dl ${DRUPAL_VERSION} --drupal-project-rename=testsites/drupal > /dev/null 2>&1 &
   - vendor/bin/drush qd --root=testsites/drupal --use-existing --account-name=admin --account-pass=admin --no-server -y > /dev/null 2>&1 &
   - vendor/bin/codecept build
 
