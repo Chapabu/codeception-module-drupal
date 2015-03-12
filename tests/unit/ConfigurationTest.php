@@ -37,12 +37,10 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     {
         parent::setUp();
 
-        // This is required as there was a commit recently that made the SuiteManager better. Sadly, it made this fail
-        // on the latest dev release for Codeception.
         if (Codeception\Codecept::VERSION >= '2.1.0') {
             $this->module = $this->moduleContainer->getModule('\Codeception\Module\Drupal7\Drupal7');
         } else {
-            $this->module = SuiteManager::$module['\Codeception\Module\Drupal7\Drupal7'];
+            $this->module = $this->getModule('\Codeception\Module\Drupal7\Drupal7');
         }
 
         $this->validConfig = Fixtures::get('validModuleConfig');
