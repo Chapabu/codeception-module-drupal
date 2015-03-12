@@ -6,7 +6,6 @@
  */
 trait FieldTrait
 {
-
     /**
      * Check that a field base exists.
      *
