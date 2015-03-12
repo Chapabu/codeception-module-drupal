@@ -20,12 +20,20 @@ mysql:
   encoding: utf8
 
 before_install:
+  - sudo apt-get update -qq > /dev/null
+  - sudo apt-get install -y -qq postfix
   - composer self-update
   # Set up the directory we're going to need during install.
   - sudo mkdir -p /var/www
   - sudo chown travis:travis /var/www
 
 install:
+
+  # Setup fake mailserver - Thanks to http://dropbucket.org/node/1761
+  - sudo service postfix stop
+  - smtp-sink -d "%d.%H.%M.%S" localhost:2500 1000 &
+  - echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
+  - echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -i | grep "PHP Version" | head -n 1 | grep -o -P '\d+\.\d+\.\d+.*'`/etc/conf.d/sendmail.ini"
   # Install Drush globally.
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require drush/drush:6.*
