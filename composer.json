@@ -32,10 +32,9 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.1.0",
-        "drush/drush": "6.*",
         "satooshi/php-coveralls": "dev-master",
-        "codeception/mockery-module": "dev-master",
-        "mikey179/vfsStream": "1.4.*"
+        "mikey179/vfsStream": "1.4.*",
+        "phpspec/prophecy": "~1.3@dev"
     },
     "repositories": [
         {
