@@ -84,4 +84,28 @@ class EntityAssertionsCest extends Drupal7AssertionCestBase
             $I->dontSeeEntityHasViewMode('node', 'full');
         });
     }
+
+    public function it_can_check_if_an_entity_has_a_base_field(UnitTester $I)
+    {
+        $I->seeEntityHasBaseField('taxonomy_vocabulary', 'hierarchy');
+    }
+
+    public function it_should_fail_if_an_entity_has_no_base_field_when_it_should(UnitTester $I)
+    {
+        $I->shouldFail(function () use ($I) {
+            $I->seeEntityHasBaseField('taxonomy_vocabulary', 'fixture');
+        });
+    }
+
+    public function it_can_check_if_an_entity_does_not_have_a_base_field(UnitTester $I)
+    {
+        $I->dontSeeEntityHasBaseField('taxonomy_vocabulary', 'fixture');
+    }
+
+    public function it_should_fail_if_an_entity_has_a_base_field_when_it_should_not(UnitTester $I)
+    {
+        $I->shouldFail(function () use ($I) {
+            $I->dontSeeEntityHasBaseField('taxonomy_vocabulary', 'hierarchy');
+        });
+    }
 }

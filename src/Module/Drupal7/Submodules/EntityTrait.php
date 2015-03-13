@@ -98,7 +98,7 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        $this->assertContains($baseField, $entityInfo[$schemaKey][$baseField]);
+        $this->assertContains($baseField, array_values($entityInfo[$schemaKey]['base table']));
     }
 
     /**
@@ -115,7 +115,7 @@ trait EntityTrait
     {
         $entityInfo = $this->grabEntityInfo($entityMachineName);
 
-        $this->assertNotContains($baseField, $entityInfo[$schemaKey][$baseField]);
+        $this->assertNotContains($baseField, array_values($entityInfo[$schemaKey]['base table']));
     }
 
     /**
