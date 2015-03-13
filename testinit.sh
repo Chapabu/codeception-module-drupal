@@ -16,7 +16,7 @@ MYSQL_URL="mysql://root@localhost/drupal_codeception_test"
 
 echo "$(tput setaf 3)Installing Drupal 7 test site"
 
-./vendor/bin/drush qd testsites/drupal7 \
+drush qd testsites/drupal7 \
     --core=drupal-7.x \
     --account-name=${ADMIN_USER} \
     --account-pass=${ADMIN_PASSWORD} \

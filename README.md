@@ -25,7 +25,7 @@ is in a `drupal` sub-directory.
 class_name: AcceptanceTester
 modules:
     enabled:
-        Drupal:
+        \Codeception\Module\Drupal7\Drupal7:
             root: 'drupal'
 ```
 
@@ -35,11 +35,12 @@ modules:
 `codecept.yml` file. If this isn't passed in it defaults to the current
 working directory.
 
+```relative``` - This allows you to specify if the path to the drupal root is relative from the `codeception.yml` file. Accepts `yes` or `no` (default `no`).
 ## Roadmap
 
-* 0.1.0
-    * There are assertions for Entities, Bundles, and Fields.
-    * There is test coverage of at _least_ 70%
+* ~~0.1.0~~
+    * ~~There are assertions for Entities, Bundles, and Fields.~~
+    * ~~There is test coverage of at _least_ 70%~~
 
 ## Running tests
 
@@ -47,11 +48,10 @@ To setup this module for testing, run `$ composer testinit` followed by
 `$ vendor/bin/codecept run` or simply `$ codecept run` if you have
 Codeception installed system wide.
 
-The `testinit.sh` script will use the bundled version of Drush to run
-`site-install` on the bundled version of Drupal.  This will install
+The `testinit.sh` script assumes you have Drush installed system-wide.  This will install
 Drupal using the username of root and a blank password to a MySQL
 database. Feel free to edit this file should you need to, but please
-ensure it is not comitted back.
+ensure it is not committed back.
 
 ## License
 
