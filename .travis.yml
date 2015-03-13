@@ -52,8 +52,3 @@ script:
 
 after_script:
   - vendor/bin/coveralls
-
-# Whitelist branches to test.
-branches:
-  only:
-    - master
