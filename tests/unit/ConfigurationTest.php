@@ -3,7 +3,6 @@
 use Codeception\Module\Drupal7\Drupal7 as Drupal;
 use Codeception\SuiteManager;
 use Codeception\Util\Fixtures;
-use Mockery as Mock;
 
 /**
  * Class ConfigurationTest
@@ -29,23 +28,6 @@ class ConfigurationTest extends \Codeception\TestCase\Test
      * @var array
      */
     protected $invalidConfig = [];
-
-    /**
-     * { @inheritdoc }
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        if (Codeception\Codecept::VERSION >= '2.1.0') {
-            $this->module = $this->moduleContainer->getModule('\Codeception\Module\Drupal7\Drupal7');
-        } else {
-            $this->module = $this->getModule('\Codeception\Module\Drupal7\Drupal7');
-        }
-
-        $this->validConfig = Fixtures::get('validModuleConfig');
-        $this->invalidConfig = Fixtures::get('invalidModuleConfig');
-    }
 
     /**
      * @test
@@ -85,6 +67,22 @@ class ConfigurationTest extends \Codeception\TestCase\Test
     public function tearDown()
     {
         $this->module->_resetConfig();
-        Mock::close();
+    }
+
+    /**
+     * { @inheritdoc }
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        if (Codeception\Codecept::VERSION >= '2.1.0') {
+            $this->module = $this->moduleContainer->getModule('\Codeception\Module\Drupal7\Drupal7');
+        } else {
+            $this->module = $this->getModule('\Codeception\Module\Drupal7\Drupal7');
+        }
+
+        $this->validConfig = Fixtures::get('validModuleConfig');
+        $this->invalidConfig = Fixtures::get('invalidModuleConfig');
     }
 }
