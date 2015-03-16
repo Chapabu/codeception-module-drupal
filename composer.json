@@ -50,7 +50,6 @@
         }
     ],
     "scripts": {
-        "testinit": "./testinit.sh",
-        "donetesting": "./donetesting.sh"
+        "testinit": "./testinit.sh"
     }
 }
