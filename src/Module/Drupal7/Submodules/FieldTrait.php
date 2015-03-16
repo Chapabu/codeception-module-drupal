@@ -6,6 +6,9 @@
  */
 trait FieldTrait
 {
+
+    use AssertMethodHelperTrait;
+
     /**
      * Check that a field base exists.
      *

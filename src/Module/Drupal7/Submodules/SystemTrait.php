@@ -6,6 +6,9 @@
  */
 trait SystemTrait
 {
+
+    use AssertMethodHelperTrait;
+
     /**
      * Check to see if a module is enabled.
      *

@@ -7,6 +7,8 @@
 trait EntityTrait
 {
 
+    use AssertMethodHelperTrait;
+
     /**
      * Check that an entity type exists.
      *
