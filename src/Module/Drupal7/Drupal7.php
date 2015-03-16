@@ -4,6 +4,7 @@ use Codeception\Exception\DrupalNotFoundException;
 use Codeception\Module;
 use Codeception\Module\Drupal7\Submodules\EntityTrait;
 use Codeception\Module\Drupal7\Submodules\FieldTrait;
+use Codeception\Module\Drupal7\Submodules\SystemTrait;
 use Codeception\Module\DrupalBaseModule;
 use Codeception\Module\DrupalModuleInterface;
 use Codeception\Util\Shared\Asserts;
@@ -16,6 +17,7 @@ class Drupal7 extends DrupalBaseModule implements DrupalModuleInterface
 {
 
     use Asserts;
+    use SystemTrait;
     use EntityTrait;
     use FieldTrait;
 
