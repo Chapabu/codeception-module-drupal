@@ -1,8 +1,6 @@
 <?php namespace Drupal7;
 
-use PHPUnit_Framework_AssertionFailedError;
 use \UnitTester;
-use Mockery as Mock;
 
 class EntityAssertionsCest extends Drupal7AssertionCestBase
 {
