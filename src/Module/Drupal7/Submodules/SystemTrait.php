@@ -10,20 +10,6 @@ trait SystemTrait
     use AssertMethodHelperTrait;
 
     /**
-     * Get the value of a variable from the system table.
-     *
-     * @param string $variableName
-     *   The variable name you want from the database (i.e. admin_theme).
-     *
-     * @return mixed
-     *   The variable value you are looking for, or null if the variable is not set or doesn't exist.
-     */
-    public function grabVariable($variableName)
-    {
-        return variable_get($variableName);
-    }
-
-    /**
      * Check to see if a module is enabled.
      *
      * @param string $moduleName
@@ -57,7 +43,21 @@ trait SystemTrait
     {
         $variableValue = $this->grabVariable($variableName);
 
-        $this->assertEquals($variableName, $expectedValue);
+        $this->assertEquals($variableValue, $expectedValue);
+    }
+
+    /**
+     * Get the value of a variable from the system table.
+     *
+     * @param string $variableName
+     *   The variable name you want from the database (i.e. admin_theme).
+     *
+     * @return mixed
+     *   The variable value you are looking for, or null if the variable is not set or doesn't exist.
+     */
+    public function grabVariable($variableName)
+    {
+        return variable_get($variableName);
     }
 
     /**
@@ -72,6 +72,6 @@ trait SystemTrait
     {
         $variableValue = $this->grabVariable($variableName);
 
-        $this->assertNotEquals($variableName, $expectedValue);
+        $this->assertNotEquals($variableValue, $expectedValue);
     }
 }
