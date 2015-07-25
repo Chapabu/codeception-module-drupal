@@ -12,7 +12,6 @@ ADMIN_USER="admin"
 ADMIN_PASSWORD="admin"
 ADMIN_MAIL="null@dev.null"
 PATH_TO_DRUPAL="$PWD/vendor/drupal/drupal"
-MYSQL_URL="mysql://root@localhost/drupal_codeception_test"
 
 echo "$(tput setaf 3)Installing Drupal 7 test site"
 

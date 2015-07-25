@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "codeception/codeception": "2.0.*"
+        "codeception/codeception": "2.*"
     },
     "autoload": {
         "psr-4": {
@@ -50,7 +50,6 @@
         }
     ],
     "scripts": {
-        "testinit": "./testinit.sh",
-        "donetesting": "./donetesting.sh"
+        "testinit": "./testinit.sh"
     }
 }
