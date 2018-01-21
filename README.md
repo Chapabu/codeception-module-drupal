@@ -65,8 +65,9 @@ We respectfully disagree. The technical part of this is true for Drupal 7. It
 function directly, in some situations (e.g. in drupal_goto()), which also 
 prevents the test process to survive more than one request. All this means, 
 though, is that in Drupal 7's case, functional tests are nothing like acceptance 
-tests, because HTTP-request-based tests are not going to fly. This is why you 
-will not find a Connector class in this package as with other frameworks. 
+tests, because HTTP-request-based tests (e.g. `$I->amOnPage()`) are not going 
+to fly. This is why you will not find a Connector class in this package as with 
+other frameworks. 
 
 However, we still have access to the API and database, which lets us do some 
 pretty useful stuff that both unit tests and acceptance tests are unable to.
