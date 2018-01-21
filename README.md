@@ -46,6 +46,31 @@ Accepts: `yes` or `no` Default: `no`
 This allows you to specify if the path to the drupal root is relative from the
 `codeception.yml` file. Accepts `yes` or `no`.
 
+## About URL-based functional tests
+The [Codeception Documentation on Functional tests](http://codeception.com/docs/04-FunctionalTests) says:
+
+> Now that we’ve written some acceptance tests, functional tests are almost the 
+> same, with one major difference: Functional tests don’t require a web server.
+
+This - or at least the first part of this - is not true for functional tests 
+for Drupal 7 (whether they be based on this module or anything else). A 
+little further, the same documentation says:
+
+> If your application was not designed to run in long lived processes (e.g. if 
+> you use the exit operator or global variables), then functional tests are 
+> probably not for you.
+
+We respectfully disagree. The technical part of this is true for Drupal 7. It
+*does* call exit and uses global variables. It also calls the header() PHP 
+function directly, in some situations (e.g. in drupal_goto()), which also 
+prevents the test process to survive more than one request. All this means, 
+though, is that in Drupal 7's case, functional tests are nothing like acceptance 
+tests, because HTTP-request-based tests are not going to fly. This is why you 
+will not find a Connector class in this package as with other frameworks. 
+
+However, we still have access to the API and database, which lets us do some 
+pretty useful stuff that both unit tests and acceptance tests are unable to.
+
 ## Contributing
 
 ### Coding standards
